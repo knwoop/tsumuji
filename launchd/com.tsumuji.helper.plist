@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.tsumuji.helper</string>
+
+  <!-- Replace with the absolute path of your built binary. -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/YOUR_USER/.local/share/ghq/github.com/knwoop/tsumuji/bin/tsumuji-helper</string>
+    <string>serve</string>
+  </array>
+
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/tsumuji-helper.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/tsumuji-helper.log</string>
+</dict>
+</plist>

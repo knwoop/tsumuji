@@ -1,0 +1,13 @@
+# Pairing key — NEVER commit
+firmware/tsumuji_keyboard/secrets.h
+
+# Go build outputs
+/bin/
+/helper/tsumuji-helper
+*.test
+
+# Arduino build cache
+firmware/**/build/
+
+# macOS
+.DS_Store
