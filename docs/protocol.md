@@ -47,6 +47,13 @@ Use this vector to validate the ESP32 (mbedtls) implementation before wiring it 
 
 ## Notes
 
-- AES-CTR gives confidentiality only; respMAC provides integrity. Upgrading to AES-GCM is a hardening option.
+- The reply is **Encrypt-then-MAC**: AES-CTR for confidentiality, `respMAC` (HMAC-SHA256 under the
+  session key, over the ciphertext) for integrity. The device MUST verify `respMAC` in constant time
+  *before* decrypting, and MUST NOT type anything if verification fails. Because the session key is
+  derived from the request nonce, a reply cannot be spliced onto a different request.
+- AES-GCM would give the same guarantee with a single primitive and less room for ordering mistakes
+  on the firmware side; switching is a candidate for when the firmware's authenticated mode is written
+  (helper change: `cipher.NewGCM` + updated known-answer vectors).
+- `ERR` replies are unauthenticated by design: an attacker who can forge them can only prevent typing.
 - Nonce replay cache lives in helper memory (bounded, FIFO eviction). A restart forgets it; acceptable for a desk device.
 - The fingerprint match is a local gate on the ESP32 and is *not* bound to this protocol (see hardening options in the plan).
